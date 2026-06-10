@@ -1,0 +1,183 @@
+/* =============================================
+   MEMBER TASK DETAILS PAGE STYLES
+   ============================================= */
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+/* Details Card */
+.details-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Info Rows */
+.info-row {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-label {
+    width: 180px;
+    font-weight: 600;
+    color: #555;
+}
+
+.info-value {
+    flex: 1;
+    color: #333;
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-new {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-progress {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* Status Select Dropdown */
+.status-select {
+    padding: 8px 15px;
+    border-radius: 50px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .status-select:focus {
+        outline: none;
+        border-color: #28a745;
+        box-shadow: 0 0 0 3px rgba(40,167,69,0.1);
+    }
+
+/* Attachment Box */
+.attachment-box {
+    background: #f8f9fc;
+    border-radius: 12px;
+    padding: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Download Button */
+.btn-download {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+    .btn-download:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(40,167,69,0.3);
+        color: white;
+    }
+
+/* Back Button */
+.btn-back {
+    background: #6c757d;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+    .btn-back:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+        color: white;
+    }
+
+/* Alert Messages */
+.alert-custom {
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.alert-success-custom {
+    background: #d4edda;
+    color: #155724;
+    border: none;
+}
+
+.alert-danger-custom {
+    background: #f8d7da;
+    color: #721c24;
+    border: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .info-row {
+        flex-direction: column;
+    }
+
+    .info-label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .page-header {
+        padding: 20px;
+    }
+
+    .details-card {
+        padding: 20px;
+    }
+}

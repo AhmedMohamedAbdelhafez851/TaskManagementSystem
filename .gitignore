@@ -1,0 +1,24 @@
+# Visual Studio
+bin/
+obj/
+*.user
+*.suo
+packages/
+*.pdb
+*.cache
+*.tmp
+*.log
+App_Data/Logs/
+.vs/
+_ReSharper.Caches/
+
+# Build results
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio Code
+.vscode/

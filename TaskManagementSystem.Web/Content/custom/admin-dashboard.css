@@ -1,0 +1,271 @@
+/* =============================================
+   ADMIN DASHBOARD STYLES
+   ============================================= */
+
+/* Welcome Card */
+.welcome-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+    .welcome-card h2 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+/* Statistics Cards */
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+    .stat-icon.total {
+        background: rgba(102,126,234,0.15);
+        color: #667eea;
+    }
+
+    .stat-icon.new {
+        background: rgba(246,194,62,0.15);
+        color: #f6c23e;
+    }
+
+    .stat-icon.progress {
+        background: rgba(54,185,204,0.15);
+        color: #36b9cc;
+    }
+
+    .stat-icon.completed {
+        background: rgba(28,200,138,0.15);
+        color: #1cc88a;
+    }
+
+.stat-value {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Action Cards */
+.action-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+    .action-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+.action-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+    .action-icon.create {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+    }
+
+    .action-icon.search {
+        background: linear-gradient(135deg, #1cc88a, #13855c);
+        color: white;
+    }
+
+.action-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.action-desc {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Recent Tasks Section */
+.recent-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    margin-top: 30px;
+}
+
+.recent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+    .recent-header h4 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0;
+        color: #333;
+    }
+
+/* Status Badges */
+.badge-status {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-new {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.badge-inprogress {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.badge-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* Custom Buttons */
+.btn-custom {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-custom-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+    .btn-custom-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102,126,234,0.3);
+    }
+
+.btn-custom-success {
+    background: linear-gradient(135deg, #1cc88a, #13855c);
+    color: white;
+}
+
+    .btn-custom-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(28,200,138,0.3);
+    }
+
+/* Custom Table */
+.table-custom {
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+}
+
+    .table-custom thead {
+        background: #f8f9fc;
+    }
+
+        .table-custom thead th {
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 15px;
+        }
+
+    .table-custom tbody td {
+        padding: 15px;
+        vertical-align: middle;
+    }
+
+    .table-custom tbody tr:hover {
+        background: #f8f9ff;
+    }
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+}
+
+.delay-4 {
+    animation-delay: 0.4s;
+}

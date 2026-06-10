@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="TaskManagementSystem.BLL/TaskManagementSystem.BLL.csproj" Id="f4b2ebab-b75c-4474-a636-ddf6674db070" />
+  <Project Path="TaskManagementSystem.DAL/TaskManagementSystem.DAL.csproj" Id="215ae030-2cc0-4c4c-b6da-f63d271864e8" />
+  <Project Path="TaskManagementSystem.Domain/TaskManagementSystem.Domain.csproj" Id="6c6837a6-d0e8-47bc-a537-72d39f300471" />
+  <Project Path="TaskManagementSystem.Tests/TaskManagementSystem.Tests.csproj" Id="1e7264b6-0597-4b19-810d-0d09450392b5" />
+  <Project Path="TaskManagementSystem.Web/TaskManagementSystem.Web.csproj" Id="395e77a5-8ccf-4b60-b465-ce29cf2512ec" />
+</Solution>

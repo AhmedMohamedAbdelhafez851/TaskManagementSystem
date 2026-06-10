@@ -1,0 +1,4 @@
+[INFO] 2026-06-10 10:30:15 - Login attempt for user: admin
+[USER_ACTION] 2026-06-10 10:30:16 - User: admin - Action: LOGIN_SUCCESS - Details: Role: Admin
+[INFO] 2026-06-10 10:30:16 - User admin logged in successfully
+--------------------------------------------------------------------------------
