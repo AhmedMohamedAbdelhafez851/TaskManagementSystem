@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TaskManagementSystem.BLL.Abstraction;
 using TaskManagementSystem.BLL.DTOs;
-using TaskManagementSystem.BLL.Utils;
 using TaskManagementSystem.DAL.Repositories;
 using TaskManagementSystem.Domain.Constants;
 using TaskManagementSystem.Domain.Entities;
 
 namespace TaskManagementSystem.BLL.Services
 {
-    public class TaskService : ITaskService
+    public class TaskService
     {
         private readonly TaskRepository _taskRepository;
         private readonly UserRepository _userRepository;
@@ -40,12 +38,8 @@ namespace TaskManagementSystem.BLL.Services
 
         public int CreateTask(CreateTaskDto dto, int createdByUserId, string uploadFolderPath)
         {
-            // Validate
-            var validationResult = ValidationHelper.ValidateCreateTask(dto);
-            if (!validationResult.IsValid)
-            {
-                throw new Exception(validationResult.GetErrorMessage());
-            }
+            if (string.IsNullOrWhiteSpace(dto.Title))
+                throw new ArgumentException("Task title is required");
 
             var task = new Task
             {
@@ -59,7 +53,6 @@ namespace TaskManagementSystem.BLL.Services
                 LastModifiedDate = DateTime.Now
             };
 
-            // Handle file upload
             if (dto.AttachmentContent != null && dto.AttachmentContent.Length > 0)
             {
                 if (!Directory.Exists(uploadFolderPath))
@@ -80,13 +73,6 @@ namespace TaskManagementSystem.BLL.Services
 
         public bool UpdateTask(UpdateTaskDto dto, int modifiedByUserId, string uploadFolderPath)
         {
-            // Validate
-            var validationResult = ValidationHelper.ValidateUpdateTask(dto);
-            if (!validationResult.IsValid)
-            {
-                throw new Exception(validationResult.GetErrorMessage());
-            }
-
             var existingTask = _taskRepository.GetById(dto.TaskId);
             if (existingTask == null)
                 throw new Exception("Task not found");
@@ -108,10 +94,8 @@ namespace TaskManagementSystem.BLL.Services
             if (isAssignedToChanged)
                 existingTask.AssignedDate = DateTime.Now;
 
-            // Handle file upload
             if (dto.AttachmentContent != null && dto.AttachmentContent.Length > 0)
             {
-                // Delete old file
                 if (!string.IsNullOrEmpty(existingTask.AttachmentPath))
                 {
                     string oldPath = Path.Combine(uploadFolderPath, Path.GetFileName(existingTask.AttachmentPath));
@@ -134,9 +118,6 @@ namespace TaskManagementSystem.BLL.Services
 
         public bool UpdateTaskStatus(int taskId, string status, int modifiedByUserId)
         {
-            if (!TaskStatusConstants.IsValid(status))
-                throw new ArgumentException($"Invalid status value: {status}", nameof(status));
-
             return _taskRepository.UpdateStatus(taskId, status, modifiedByUserId);
         }
 
@@ -165,18 +146,8 @@ namespace TaskManagementSystem.BLL.Services
                 UserId = m.UserId,
                 UserName = m.UserName,
                 FullName = m.FullName,
-                Email = m.Email,
                 Role = m.Role
             }).ToList();
-        }
-
-        public bool CanUserAccessTask(int userId, int taskId, string userRole)
-        {
-            if (userRole == UserRoleConstants.Admin)
-                return true;
-
-            var task = _taskRepository.GetById(taskId);
-            return task != null && task.AssignedToUserId == userId;
         }
 
         public UserDto GetUserById(int userId)
@@ -187,7 +158,6 @@ namespace TaskManagementSystem.BLL.Services
                 UserId = user.UserId,
                 UserName = user.UserName,
                 FullName = user.FullName,
-                Email = user.Email,
                 Role = user.Role
             } : null;
         }

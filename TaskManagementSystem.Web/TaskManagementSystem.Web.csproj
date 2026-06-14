@@ -142,6 +142,9 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\BaseAdminPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Admin\CreateTask.aspx.cs">
       <DependentUpon>CreateTask.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -170,9 +173,13 @@
     <Compile Include="Admin\TaskDetails.aspx.designer.cs">
       <DependentUpon>TaskDetails.aspx</DependentUpon>
     </Compile>
+    <Content Include="App_Code\Utils\FileLogger.cs" />
+    <Content Include="App_Code\Helpers\SessionHelper.cs" />
+    <Compile Include="App_Start\DependencyInjectionConfig.cs" />
+    <Compile Include="Member\BaseMemberPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Utils\FileLogger.cs" />
-    <Content Include="App_Code\BaseAdminPage.cs" />
-    <Content Include="App_Code\BaseMemberPage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

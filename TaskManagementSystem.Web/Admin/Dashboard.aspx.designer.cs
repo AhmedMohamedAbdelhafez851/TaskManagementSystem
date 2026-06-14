@@ -9,7 +9,6 @@
         protected global::System.Web.UI.WebControls.Literal litCompletedTasks;
         protected global::System.Web.UI.WebControls.Button btnCreateTask;
         protected global::System.Web.UI.WebControls.Button btnSearchTasks;
-        protected global::System.Web.UI.WebControls.Button btnViewAll;
         protected global::System.Web.UI.WebControls.GridView gvRecentTasks;
     }
 }

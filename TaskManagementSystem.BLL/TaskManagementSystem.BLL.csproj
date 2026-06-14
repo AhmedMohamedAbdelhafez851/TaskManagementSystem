@@ -46,13 +46,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\IAdminService.cs" />
+    <Compile Include="Abstraction\IMemberService.cs" />
+    <Compile Include="Abstraction\IUserSession.cs" />
     <Compile Include="DTOs\BaseDto.cs" />
     <Compile Include="DTOs\CreateTaskDto.cs" />
+    <Compile Include="DTOs\DashboardStatisticsDto.cs" />
+    <Compile Include="DTOs\MemberTaskDto.cs" />
+    <Compile Include="DTOs\OverdueTaskDto.cs" />
+    <Compile Include="DTOs\RecentTaskDto.cs" />
     <Compile Include="DTOs\SearchCriteriaDto.cs" />
     <Compile Include="DTOs\SearchResultDto.cs" />
     <Compile Include="DTOs\TaskDto.cs" />
     <Compile Include="DTOs\TaskSearchCriteriaDto.cs" />
     <Compile Include="DTOs\TaskSearchResultDto.cs" />
+    <Compile Include="DTOs\TaskStatisticsDto.cs" />
     <Compile Include="DTOs\UpdateTaskDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,8 +68,10 @@
     <Compile Include="Abstraction\IAuthService.cs" />
     <Compile Include="Abstraction\IPasswordService.cs" />
     <Compile Include="Abstraction\ITaskService.cs" />
+    <Compile Include="Services\MemberService.cs" />
     <Compile Include="Services\PasswordService.cs" />
     <Compile Include="Services\TaskService.cs" />
+    <Compile Include="Services\AdminService.cs" />
     <Compile Include="Utils\ValidationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +87,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Services\.editorconfig" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

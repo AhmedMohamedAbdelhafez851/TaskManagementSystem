@@ -81,6 +81,10 @@
       <Project>{F4B2EBAB-B75C-4474-A636-DDF6674DB070}</Project>
       <Name>TaskManagementSystem.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaskManagementSystem.DAL\TaskManagementSystem.DAL.csproj">
+      <Project>{215AE030-2CC0-4C4C-B6DA-F63D271864E8}</Project>
+      <Name>TaskManagementSystem.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TaskManagementSystem.Domain\TaskManagementSystem.Domain.csproj">
       <Project>{6C6837A6-D0E8-47BC-A537-72D39F300471}</Project>
       <Name>TaskManagementSystem.Domain</Name>

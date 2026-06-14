@@ -1,11 +1,9 @@
 ﻿using System;
+using TaskManagementSystem.Domain.Interfaces;
 
 namespace TaskManagementSystem.Domain.Entities
 {
-    /// <summary>
-    /// Represents a user in the system (Admin or Member)
-    /// </summary>
-    public class User
+    public class User : IEntity
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
@@ -19,7 +17,13 @@ namespace TaskManagementSystem.Domain.Entities
         public DateTime? LastLoginDate { get; set; }
         public int? CreatedByUserId { get; set; }
 
-        // Business logic properties
+        // IEntity implementation
+        public int Id
+        {
+            get => UserId;
+            set => UserId = value;
+        }
+
         public bool IsAdmin => Role == "Admin";
         public bool IsMember => Role == "Member";
     }

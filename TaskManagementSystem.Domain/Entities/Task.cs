@@ -1,12 +1,10 @@
 ﻿using System;
 using TaskManagementSystem.Domain.Constants;
+using TaskManagementSystem.Domain.Interfaces;
 
 namespace TaskManagementSystem.Domain.Entities
 {
-    /// <summary>
-    /// Represents a task in the system
-    /// </summary>
-    public class Task
+    public class Task : IEntity
     {
         public int TaskId { get; set; }
         public string Title { get; set; }
@@ -23,6 +21,13 @@ namespace TaskManagementSystem.Domain.Entities
         public DateTime? LastModifiedDate { get; set; }
         public int? LastModifiedByUserId { get; set; }
         public bool IsDeleted { get; set; }
+
+        // IEntity implementation
+        public int Id
+        {
+            get => TaskId;
+            set => TaskId = value;
+        }
 
         // Display properties (from JOIN)
         public string AssignedToName { get; set; }

@@ -42,15 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Constants\PageRoutes.cs" />
+    <Content Include="Constants\SessionKeys.cs" />
+    <Compile Include="Constants\CookieNames.cs" />
+    <Compile Include="Constants\SecurityConstants.cs" />
     <Compile Include="Constants\TaskStatusConstants.cs" />
     <Compile Include="Constants\UserRoleConstants.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\TaskStatusEnum.cs" />
     <Compile Include="Enums\UserRoleEnum.cs" />
+    <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="Interfaces\IPasswordService.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\ITaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

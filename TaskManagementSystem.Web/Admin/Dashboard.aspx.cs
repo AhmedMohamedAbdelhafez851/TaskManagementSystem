@@ -1,37 +1,20 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Web.UI.WebControls;
+using TaskManagementSystem.BLL.Abstraction;
+using TaskManagementSystem.BLL.Services;
+using TaskManagementSystem.Web.Utils;
 
 namespace TaskManagementSystem.Web.Admin
 {
-    public partial class Dashboard : System.Web.UI.Page
+    public partial class Dashboard : BaseAdminPage
     {
-        private string _connectionString;
+        private IAdminService _adminService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Security Check
-            if (Session["UserId"] == null)
-            {
-                Response.Redirect("~/Account/Login.aspx", false);
-                return;
-            }
+            FileLogger.LogDebug("Admin Dashboard loaded");
+            _adminService = new AdminService();
 
-            if (Session["UserRole"] == null || Session["UserRole"].ToString() != "Admin")
-            {
-                Response.Redirect("~/Shared/AccessDenied.aspx", false);
-                return;
-            }
-
-            _connectionString = ConfigurationManager.ConnectionStrings["TaskManagementDB"].ConnectionString;
-
-            // Set welcome message
-            if (Session["UserFullName"] != null)
-            {
-                litUserName.Text = Session["UserFullName"].ToString();
-            }
+            litUserName.Text = CurrentUserFullName;
 
             if (!IsPostBack)
             {
@@ -44,50 +27,17 @@ namespace TaskManagementSystem.Web.Admin
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
-                {
-                    conn.Open();
+                var stats = _adminService.GetDashboardStatistics();
 
-                    // Total Tasks
-                    string totalSql = "SELECT COUNT(*) FROM Tasks WHERE IsDeleted = 0";
-                    using (SqlCommand cmd = new SqlCommand(totalSql, conn))
-                    {
-                        int total = Convert.ToInt32(cmd.ExecuteScalar());
-                        litTotalTasks.Text = total.ToString();
-                    }
-
-                    // New Tasks
-                    string newSql = "SELECT COUNT(*) FROM Tasks WHERE Status = 'New' AND IsDeleted = 0";
-                    using (SqlCommand cmd = new SqlCommand(newSql, conn))
-                    {
-                        int newCount = Convert.ToInt32(cmd.ExecuteScalar());
-                        litNewTasks.Text = newCount.ToString();
-                    }
-
-                    // In Progress Tasks
-                    string progressSql = "SELECT COUNT(*) FROM Tasks WHERE Status = 'InProgress' AND IsDeleted = 0";
-                    using (SqlCommand cmd = new SqlCommand(progressSql, conn))
-                    {
-                        int progress = Convert.ToInt32(cmd.ExecuteScalar());
-                        litInProgressTasks.Text = progress.ToString();
-                    }
-
-                    // Completed Tasks
-                    string completedSql = "SELECT COUNT(*) FROM Tasks WHERE Status = 'Completed' AND IsDeleted = 0";
-                    using (SqlCommand cmd = new SqlCommand(completedSql, conn))
-                    {
-                        int completed = Convert.ToInt32(cmd.ExecuteScalar());
-                        litCompletedTasks.Text = completed.ToString();
-                    }
-                }
+                litTotalTasks.Text = stats.TotalTasks.ToString();
+                litNewTasks.Text = stats.NewTasks.ToString();
+                litInProgressTasks.Text = stats.InProgressTasks.ToString();
+                litCompletedTasks.Text = stats.CompletedTasks.ToString();
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error loading statistics: " + ex.Message);
-                litTotalTasks.Text = "0";
-                litNewTasks.Text = "0";
-                litInProgressTasks.Text = "0";
-                litCompletedTasks.Text = "0";
+                FileLogger.LogError("Error loading statistics", ex);
+                SetDefaultStatistics();
             }
         }
 
@@ -95,31 +45,22 @@ namespace TaskManagementSystem.Web.Admin
         {
             try
             {
-                DataTable dt = new DataTable();
-
-                using (SqlConnection conn = new SqlConnection(_connectionString))
-                {
-                    conn.Open();
-                    string sql = @"SELECT TOP 5 t.TaskId, t.Title, t.Status, t.CreatedDate, u.FullName AS AssignedToName
-                                  FROM Tasks t
-                                  INNER JOIN Users u ON t.AssignedToUserId = u.UserId
-                                  WHERE t.IsDeleted = 0
-                                  ORDER BY t.CreatedDate DESC";
-
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                    {
-                        da.Fill(dt);
-                    }
-                }
-
-                gvRecentTasks.DataSource = dt;
+                var tasks = _adminService.GetRecentTasks(5);
+                gvRecentTasks.DataSource = tasks;
                 gvRecentTasks.DataBind();
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error loading recent tasks: " + ex.Message);
+                FileLogger.LogError("Error loading recent tasks", ex);
             }
+        }
+
+        private void SetDefaultStatistics()
+        {
+            litTotalTasks.Text = "0";
+            litNewTasks.Text = "0";
+            litInProgressTasks.Text = "0";
+            litCompletedTasks.Text = "0";
         }
 
         protected void btnCreateTask_Click(object sender, EventArgs e)
@@ -134,24 +75,18 @@ namespace TaskManagementSystem.Web.Admin
 
         protected string GetBadgeClass(string status)
         {
-            switch (status)
-            {
-                case "New": return "new";
-                case "InProgress": return "inprogress";
-                case "Completed": return "completed";
-                default: return "new";
-            }
+            if (status == "New") return "new";
+            if (status == "InProgress") return "inprogress";
+            if (status == "Completed") return "completed";
+            return "new";
         }
 
         protected string GetStatusDisplayName(string status)
         {
-            switch (status)
-            {
-                case "New": return "New";
-                case "InProgress": return "In Progress";
-                case "Completed": return "Completed";
-                default: return status;
-            }
+            if (status == "New") return "New";
+            if (status == "InProgress") return "In Progress";
+            if (status == "Completed") return "Completed";
+            return status;
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System;
-using TaskManagementSystem.BLL.Abstraction;
 using TaskManagementSystem.DAL.Repositories;
 using TaskManagementSystem.Domain.Entities;
 
 namespace TaskManagementSystem.BLL.Services
 {
-    public class AuthService : IAuthService
+    public class AuthService
     {
         private readonly UserRepository _userRepository;
         private readonly PasswordService _passwordService;
@@ -16,16 +15,19 @@ namespace TaskManagementSystem.BLL.Services
             _passwordService = new PasswordService();
         }
 
+        public AuthService(UserRepository userRepository, PasswordService passwordService)
+        {
+            _userRepository = userRepository;
+            _passwordService = passwordService;
+        }
+
         public User Authenticate(string username, string password)
         {
             try
             {
                 var user = _userRepository.GetByUsername(username);
 
-                if (user == null)
-                    return null;
-
-                if (!user.IsActive)
+                if (user == null || !user.IsActive)
                     return null;
 
                 bool isPasswordValid = _passwordService.VerifyPassword(password, user.PasswordHash, user.PasswordSalt);
@@ -35,7 +37,7 @@ namespace TaskManagementSystem.BLL.Services
 
                 _userRepository.UpdateLastLoginDate(user.UserId);
 
-                // Remove sensitive data before returning
+                // Remove sensitive data
                 user.PasswordHash = null;
                 user.PasswordSalt = null;
 
