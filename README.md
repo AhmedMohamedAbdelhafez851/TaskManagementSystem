@@ -70,6 +70,3 @@ ASP.NET WebForms application with Clean Architecture, Repository Pattern, and ro
 4. Build → Rebuild Solution
 5. Press F5
 
----
-
-## Project Structure
